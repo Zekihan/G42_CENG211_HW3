@@ -1,5 +1,5 @@
 package business;
 
-public class Movie extends Item {
+public class Movie extends RentableItem {
 
 }
