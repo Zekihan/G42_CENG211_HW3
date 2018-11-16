@@ -1,9 +1,14 @@
 package business;
 
+
 public class Book extends RentableItem {
 
 	private String author;
 	private String publisher;
+	
+	public Book() {
+		this("no name", -1, "no author", "no publisher");
+	}
 	
 	public Book(String name, int itemNo, String author, String publisher) {
 		super(name,itemNo);
@@ -13,7 +18,7 @@ public class Book extends RentableItem {
 
 	@Override
 	public void store(String format) {
-		// TODO Auto-generated method stub
+		
 	}
 
 	public String getAuthor() {

@@ -1,6 +1,4 @@
 package business;
-
-
 import java.util.Date;
 
 public class Invoice {
@@ -35,8 +33,8 @@ public class Invoice {
 	private void setDueDate(int dayNum) {
 		long date = rentDate.getTime();
 		this.dueDate = new Date(date + (dayNum * 86400000));
-		
 	}
+	
 	private void setItem(RentableItem item) {
 		this.item = item;
 	}

@@ -7,7 +7,7 @@ import business.Book;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class BookSaver {
+public class BookSaverJson {
 
 	@SuppressWarnings("unchecked")
 	public void saverJson(Book book) {
