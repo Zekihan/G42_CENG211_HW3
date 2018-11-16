@@ -1,5 +1,6 @@
 package dataaccess;
-import java.io.*;
+import java.io.File;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,8 +20,11 @@ import business.Book;
 public class BookSaverXml {
 	
 	
-	public BookSaverXml(Book book) {
+	public BookSaverXml() {
 		
+	}
+	
+	public void save(Book book) {
 		try {
 
 			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
@@ -29,48 +33,34 @@ public class BookSaverXml {
 
 			Document document = documentBuilder.newDocument();
 
-			// root element
 			Element root = document.createElement("item");
 			document.appendChild(root);
 
-			// employee element
-			Element employee = document.createElement("book");
+			Element bookItem = document.createElement("book");
 
-			root.appendChild(employee);
+			root.appendChild(bookItem);
 
-			// set an attribute to staff element
 			Attr attr = document.createAttribute("id");
 			attr.setValue(book.getItemNo() + "");
-			employee.setAttributeNode(attr);
+			bookItem.setAttributeNode(attr);
 
-			//you can also use staff.setAttribute("id", "1") for this
-
-			// firstname element
 			Element name = document.createElement("name");
 			name.appendChild(document.createTextNode(book.getName()));
-			employee.appendChild(name);
+			bookItem.appendChild(name);
 
-			// email element
 			Element author = document.createElement("author");
 			author.appendChild(document.createTextNode(book.getAuthor()));
-			employee.appendChild(author);
+			bookItem.appendChild(author);
 
-			// department elements
 			Element publisher = document.createElement("publisher");
 			publisher.appendChild(document.createTextNode(book.getPublisher()));
-			employee.appendChild(publisher);
+			bookItem.appendChild(publisher);
 
-			// create the xml file
-			//transform the DOM Object to an XML File
+
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
-			StreamResult streamResult = new StreamResult(System.out);
-
-			// If you use
-			// StreamResult result = new StreamResult(System.out);
-			// the output will be pushed to the standard output ...
-			// You can use that for debugging 
+			StreamResult streamResult = new StreamResult(new File(book.getItemNo() + ".xml"));
 
 			transformer.transform(domSource, streamResult);
 
