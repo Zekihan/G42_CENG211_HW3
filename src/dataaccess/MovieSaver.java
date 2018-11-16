@@ -1,4 +1,4 @@
-package DataAccess;
+package dataaccess;
 
 public class MovieSaver {
 
