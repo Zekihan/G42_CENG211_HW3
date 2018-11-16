@@ -1,18 +1,18 @@
 package business;
-import dataaccess.BookSaverJson;
-import dataaccess.BookSaverXml;
+import dataaccess.BookSaver;
 
 public class App {
 
 	public static void main(String[] args) {
 		
 		Book book = new Book("Moby Dick", 101, "Herman Melville", "Cambridge");
-		BookSaverJson booksvjson = new BookSaverJson();
+		BookSaver booksvjson = new BookSaver();
 		booksvjson.saverJson(book);
 		
-		BookSaverXml bookSvXml = new BookSaverXml();
-		bookSvXml.save(book);
+		BookSaver bookSvXml = new BookSaver();
+		bookSvXml.saverXml(book);
 
 	}
+	
 
 }
