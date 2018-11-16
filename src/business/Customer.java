@@ -11,4 +11,8 @@ public enum Customer {
 	Customer(int discount) {
 		this.discount = discount;
 	}
+
+	public int getDiscount() {
+		return discount;
+	}
 }
