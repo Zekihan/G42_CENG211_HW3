@@ -11,7 +11,7 @@ import business.Movie;
 public class MovieSaver {
 
 	@SuppressWarnings("unchecked")
-	public void saver(Movie movie) {
+	public void saverJson(Movie movie) {
 		
 		JSONObject movies = new JSONObject();
 		
@@ -38,7 +38,5 @@ public class MovieSaver {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		System.out.print(movies.toJSONString());
 	}
 }

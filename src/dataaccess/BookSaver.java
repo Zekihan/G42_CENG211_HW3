@@ -10,9 +10,10 @@ import java.io.IOException;
 public class BookSaver {
 
 	@SuppressWarnings("unchecked")
-	public void saver(Book book) {
+	public void saverJson(Book book) {
 		
 		JSONObject books = new JSONObject();
+		
 		books.put("itemno", book.getItemNo());
 		books.put("name", book.getName());
 		books.put("author", book.getAuthor());
@@ -28,7 +29,5 @@ public class BookSaver {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		System.out.print(books.toJSONString());
 	}
 }
