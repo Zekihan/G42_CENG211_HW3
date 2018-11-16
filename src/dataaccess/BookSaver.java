@@ -27,7 +27,7 @@ public class BookSaver {
 		
 		JSONObject books = new JSONObject();
 		
-		books.put("itemno", book.getItemNo());
+		books.put("id", book.getItemNo());
 		books.put("name", book.getName());
 		books.put("author", book.getAuthor());
 		books.put("publisher", book.getPublisher());

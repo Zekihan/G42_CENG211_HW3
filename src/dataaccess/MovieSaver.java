@@ -28,7 +28,7 @@ public class MovieSaver {
 		
 		JSONObject movies = new JSONObject();
 		
-		movies.put("itemno", movie.getItemNo());
+		movies.put("id", movie.getItemNo());
 		movies.put("name", movie.getName());
 		movies.put("genre", movie.getGenre());
 		movies.put("producer", movie.getProducer());
