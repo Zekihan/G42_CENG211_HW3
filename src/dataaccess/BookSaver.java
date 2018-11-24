@@ -35,7 +35,7 @@ public class BookSaver {
 		
 		try {
 
-			FileWriter file = new FileWriter("src/Files/"+book.getItemNo()+".json");
+			FileWriter file = new FileWriter("Files/"+book.getItemNo()+".json");
 			file.write(books.toJSONString());;
 			file.flush();
 			file.close();
@@ -79,7 +79,7 @@ public class BookSaver {
 		filer.put("books",books);
 		try {
 
-			FileWriter file = new FileWriter("src/Files/books.json");
+			FileWriter file = new FileWriter("Files/books.json");
 			file.write(filer.toJSONString());;
 			file.flush();
 			file.close();
@@ -115,7 +115,7 @@ public class BookSaver {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
-			StreamResult streamResult = new StreamResult(new File("src/Files/"+book.getItemNo() + ".xml"));
+			StreamResult streamResult = new StreamResult(new File("Files/"+book.getItemNo() + ".xml"));
 			transformer.transform(domSource, streamResult);
 			
 		} catch (ParserConfigurationException pce) {

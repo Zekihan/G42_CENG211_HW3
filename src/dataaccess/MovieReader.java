@@ -16,7 +16,7 @@ public class MovieReader {
 
         try {
 
-            Object obj = parser.parse(new FileReader("src/Files/"+itemNo+".json"));
+            Object obj = parser.parse(new FileReader("Files/"+itemNo+".json"));
 
             JSONObject jsonObject = (JSONObject) obj;
 
@@ -45,7 +45,7 @@ public class MovieReader {
 
         try {
 
-        	FileReader newFile = new FileReader("src/Files/movies.json");
+        	FileReader newFile = new FileReader("Files/movies.json");
         	if(newFile.ready()) {
         		Object obj = parser.parse(newFile);
 

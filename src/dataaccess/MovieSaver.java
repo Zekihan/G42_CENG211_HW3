@@ -44,7 +44,7 @@ public class MovieSaver {
 		
 		try {
 
-			FileWriter file = new FileWriter("src/Files/"+movie.getItemNo()+".json");
+			FileWriter file = new FileWriter("Files/"+movie.getItemNo()+".json");
 			file.write(movies.toJSONString());
 			file.flush();
 			file.close();
@@ -95,7 +95,7 @@ public class MovieSaver {
 		filer.put("movies",movies);
 		try {
 
-			FileWriter file = new FileWriter("src/Files/movies.json");
+			FileWriter file = new FileWriter("Files/movies.json");
 			file.write(filer.toJSONString());;
 			file.flush();
 			file.close();
@@ -145,7 +145,7 @@ public class MovieSaver {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
-			StreamResult streamResult = new StreamResult(new File("src/Files/"+movie.getItemNo() + ".xml"));
+			StreamResult streamResult = new StreamResult(new File("Files/"+movie.getItemNo() + ".xml"));
 
 			transformer.transform(domSource, streamResult);
 
