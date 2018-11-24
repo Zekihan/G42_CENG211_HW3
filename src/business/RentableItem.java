@@ -4,10 +4,12 @@ public abstract class RentableItem implements IRentable,IStorable,ISearchable {
 
 	private String name;
 	private int itemNo;
+	private boolean isRented;
 	
 	public RentableItem(String name, int itemNo) {
 		setName(name);
 		setItemNo(itemNo);
+		setRented(true);
 	}
 	
 	@Override
@@ -36,6 +38,14 @@ public abstract class RentableItem implements IRentable,IStorable,ISearchable {
 
 	private void setItemNo(int itemNo) {
 		this.itemNo = itemNo;
+	}
+
+	public boolean isRented() {
+		return isRented;
+	}
+
+	private void setRented(boolean isRented) {
+		this.isRented = isRented;
 	}
 	
 	
