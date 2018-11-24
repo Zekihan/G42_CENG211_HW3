@@ -1,5 +1,6 @@
 package dataaccess;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -34,8 +35,8 @@ public class BookSaver {
 		
 		try {
 
-			FileWriter file = new FileWriter(book.getItemNo()+".json");
-			file.write(books.toJSONString());
+			FileWriter file = new FileWriter("src/Files/"+book.getItemNo()+".json");
+			file.write(books.toJSONString());;
 			file.flush();
 			file.close();
 
@@ -43,6 +44,52 @@ public class BookSaver {
 			e.printStackTrace();
 		}
 	}
+	@SuppressWarnings("unchecked")
+	public void saverManyJson(Book book) {
+		
+		BookReader reader = new BookReader();
+		JSONArray books = reader.readerManyJson();
+		if (books == null) {
+			books = new JSONArray();
+		}
+		JSONObject bookJ = new JSONObject();
+		bookJ.put("id", book.getItemNo());
+		bookJ.put("name", book.getName());
+		bookJ.put("author", book.getAuthor());
+		bookJ.put("publisher", book.getPublisher());
+
+		if(books.size()!=0) {
+			boolean flag = false;
+			for (Object object : books) {
+				JSONObject obj = (JSONObject) object;
+				if(!(obj.toJSONString().equals(bookJ.toJSONString()))) {
+					flag = true;
+					System.out.println("bb");
+				}
+			}
+			if(flag) {
+				books.add(bookJ);
+			}
+		}else {
+			books.add(bookJ);
+		}
+		
+		
+		JSONObject filer = new JSONObject();
+		filer.put("books",books);
+		try {
+
+			FileWriter file = new FileWriter("src/Files/books.json");
+			file.write(filer.toJSONString());;
+			file.flush();
+			file.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	public void saverXml(Book book) {
 		try {
@@ -68,7 +115,7 @@ public class BookSaver {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
-			StreamResult streamResult = new StreamResult(new File(book.getItemNo() + ".xml"));
+			StreamResult streamResult = new StreamResult(new File("src/Files/"+book.getItemNo() + ".xml"));
 			transformer.transform(domSource, streamResult);
 			
 		} catch (ParserConfigurationException pce) {

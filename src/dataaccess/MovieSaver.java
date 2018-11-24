@@ -19,6 +19,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import business.Book;
 import business.Movie;
 
 public class MovieSaver {
@@ -43,7 +44,7 @@ public class MovieSaver {
 		
 		try {
 
-			FileWriter file = new FileWriter(movie.getItemNo()+".json");
+			FileWriter file = new FileWriter("src/Files/"+movie.getItemNo()+".json");
 			file.write(movies.toJSONString());
 			file.flush();
 			file.close();
@@ -51,6 +52,58 @@ public class MovieSaver {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	@SuppressWarnings("unchecked")
+	public void saverManyJson(Movie movie) {
+		
+		MovieReader reader = new MovieReader();
+		JSONArray movies = reader.readerManyJson();
+		if (movies == null) {
+			movies = new JSONArray();
+		}
+		JSONObject movieJ = new JSONObject();
+		
+		movieJ.put("id", movie.getItemNo());
+		movieJ.put("name", movie.getName());
+		movieJ.put("genre", movie.getGenre());
+		movieJ.put("producer", movie.getProducer());
+		
+		JSONArray actors = new JSONArray();
+		
+		for (String actor : movie.getActors()) {
+			actors.add(actor);
+		}
+		movieJ.put("actors", actors);
+		
+		if(movies.size()!=0) {
+			boolean flag = false;
+			for (Object object : movies) {
+				JSONObject obj = (JSONObject) object;
+				if(!(obj.toJSONString().equals(movieJ.toJSONString()))) {
+					flag = true;
+					System.out.println("bb");
+				}
+			}
+			if(flag) {
+				movies.add(movieJ);
+			}
+		}else {
+			movies.add(movieJ);
+		}
+		
+		JSONObject filer = new JSONObject();
+		filer.put("movies",movies);
+		try {
+
+			FileWriter file = new FileWriter("src/Files/movies.json");
+			file.write(filer.toJSONString());;
+			file.flush();
+			file.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void saverXml(Movie movie) {
@@ -92,11 +145,9 @@ public class MovieSaver {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
-			StreamResult streamResult = new StreamResult(new File(movie.getItemNo() + ".xml"));
+			StreamResult streamResult = new StreamResult(new File("src/Files/"+movie.getItemNo() + ".xml"));
 
 			transformer.transform(domSource, streamResult);
-
-			System.out.println("Done creating XML File");
 
 		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
