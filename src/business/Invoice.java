@@ -7,11 +7,11 @@ public class Invoice {
 	private RentableItem item;
 	private double cost;
 	
-	public Invoice(int dayNum, RentableItem item, double cost) {
-		setRentDate(new Date());
+	public Invoice(Date opDate, RentableItem item, double cost) {
+		setRentDate(opDate);
 		setCost(cost);
-		setDueDate(dayNum);
 		setItem(item);
+		setDueDate(findDueDay(item));
 	}
 	
 	
@@ -41,7 +41,15 @@ public class Invoice {
 	private void setCost(double cost) {
 		this.cost = cost;
 	}
-	
+	private int findDueDay(RentableItem item) {
+		if (item.getClass() == Book.class) {
+			return 7;
+		}else if(item.getClass() == Movie.class) {
+			return 2;
+		}else {
+			throw new IllegalArgumentException("Invalid item type");
+		}
+	}
 	
 }
 

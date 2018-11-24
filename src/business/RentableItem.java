@@ -5,11 +5,13 @@ public abstract class RentableItem implements IRentable,IStorable,ISearchable {
 	private String name;
 	private int itemNo;
 	private boolean isRented;
+	private Policy policy;
 	
 	public RentableItem(String name, int itemNo) {
 		setName(name);
 		setItemNo(itemNo);
 		setRented(true);
+		setPolicy(Policy.NewReleasePolicy);
 	}
 	
 	@Override
@@ -44,6 +46,14 @@ public abstract class RentableItem implements IRentable,IStorable,ISearchable {
 
 	private void setRented(boolean isRented) {
 		this.isRented = isRented;
+	}
+
+	public Policy getPolicy() {
+		return policy;
+	}
+
+	public void setPolicy(Policy policy) {
+		this.policy = policy;
 	}
 	
 	
