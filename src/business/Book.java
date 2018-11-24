@@ -36,5 +36,25 @@ public class Book extends RentableItem {
 	private void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
+
+	@Override
+	public String getTextToSearchOn(String attribute) {
+		String text;
+		switch(attribute) {
+			case "author":
+				text = getAuthor();
+				break;
+			case "publisher":
+				text =  getPublisher();
+				break;
+			case "name":
+				text = getName();
+				break;
+			default:
+				text = null;
+				break;
+		}
+		return text;
+	}
 	
 }

@@ -45,4 +45,31 @@ public class Movie extends RentableItem {
 		this.actors = actors;
 	}
 
+	@Override
+	public String getTextToSearchOn(String attribute) {
+		String text = "";
+		switch(attribute) {
+			case "genre":
+				text = getGenre();
+				break;
+			case "producer":
+				text =  getProducer();
+				break;
+			case "name":
+				text = getName();
+				break;
+			case "actor":
+				for (String actor: getActors()) {
+					text += actor + " ";
+				}
+				break;
+			default:
+				text = null;
+				break;
+		}
+		return text;
+	}
+	
+	
+
 }

@@ -14,14 +14,12 @@ public abstract class RentableItem implements IRentable,IStorable,ISearchable {
 	
 	@Override
 	public void rent() {
-		// TODO Auto-generated method stub
-		
+		setRented(true);
 	}
 
 	@Override
 	public void turnIn() {
-		// TODO Auto-generated method stub
-		
+		setRented(false);
 	}
 	
 	public String getName() {
