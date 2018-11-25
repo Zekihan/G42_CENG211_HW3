@@ -68,8 +68,25 @@ public class RentalStoreApp {
 	}
 
 	private void changeCustType() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Enter customer id:");
+		int id = keyboard.nextInt();
+		Customer cust = mngr.findCustById(id);
+		System.out.println("Choose customer type: "+ System.lineSeparator()+
+				"1) Regular" + System.lineSeparator() +
+				"2) Silver" + System.lineSeparator() +
+				"3) Gold" + System.lineSeparator() +
+				"4) Premium" + System.lineSeparator());
+		int a = keyboard.nextInt();
+		switch(a) {
+			case 1: cust.setType(CustomerType.REGULAR);
+					break;
+			case 2: cust.setType(CustomerType.SILVER);
+					break;
+			case 3: cust.setType(CustomerType.GOLD);
+					break;
+			case 4: cust.setType(CustomerType.PREMIUM);
+					break;
+		}
 	}
 
 	private void changePolicy() {
