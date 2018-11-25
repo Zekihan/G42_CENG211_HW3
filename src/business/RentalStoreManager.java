@@ -19,10 +19,12 @@ public class RentalStoreManager {
 		movieStock = new ArrayList<>();
 		customers = new ArrayList<>();
 	}
+	
 	public void addMovieItem(String name, String genre, String producer, ArrayList<String> actors) {
 		RentableItem movieItem = new Movie(name, createItemId(), genre, producer, actors);
 		movieStock.add(movieItem);
 	}
+	
 	public void addBookItem(String name, String author, String publisher) {
 		RentableItem bookItem = new Book(name, createItemId(), author, publisher);
 		bookStock.add(bookItem);
@@ -36,6 +38,7 @@ public class RentalStoreManager {
 			rent(customerNo, item, operationDay);
 		}
 	}
+	
 	public void returnItem(int customerNo, String itemType, int itemNo, String operationDay) {
 		RentableItem item = findItemById(itemType, itemNo);
 		if (!item.isRented()) {
@@ -44,7 +47,21 @@ public class RentalStoreManager {
 			turnIn(customerNo, item, operationDay);
 		}
 	}
-	public ArrayList<RentableItem> search(ArrayList<RentableItem> items, String searchText, String searchAtt){
+	
+	public ArrayList<RentableItem> searchBooks(String searchText, String searchAtt){
+		return search(bookStock, searchText, searchAtt);
+	}
+	public ArrayList<RentableItem> searchMovies(String searchText, String searchAtt){
+		return search(movieStock, searchText, searchAtt);
+	}
+	public ArrayList<RentableItem> searchBooksVanced(String searchText1, String searchText2, String searchAtt1, String searchAtt2){
+		return searchVanced(bookStock, searchText1, searchText2, searchAtt1, searchAtt2);
+	}
+	public ArrayList<RentableItem> searchMoviesVanced(String searchText1, String searchText2, String searchAtt1, String searchAtt2){
+		return searchVanced(bookStock, searchText1, searchText2, searchAtt1, searchAtt2);
+	}
+	
+	private ArrayList<RentableItem> search(ArrayList<RentableItem> items, String searchText, String searchAtt){
 		ArrayList<RentableItem> result = new ArrayList<RentableItem>();
 		for (RentableItem item: items) {
 			if (item.getTextToSearchOn(searchAtt).equals(searchText)){
@@ -54,7 +71,7 @@ public class RentalStoreManager {
 		return result;
 	}
 	
-	public ArrayList<RentableItem> searchVanced(ArrayList<RentableItem> items, String searchText1,
+	private ArrayList<RentableItem> searchVanced(ArrayList<RentableItem> items, String searchText1,
 			String searchText2, String searchAtt1, String searchAtt2){
 		ArrayList<RentableItem> result = new ArrayList<RentableItem>();
 		for (RentableItem item: items) {
@@ -68,26 +85,26 @@ public class RentalStoreManager {
 	public ArrayList<Invoice> getInvoices() {
 		return invoices;
 	}
+	
 	private ArrayList<Customer> getCustomers() {
 		return customers;
 	}
 	
 	private void rent(int customerNo, RentableItem item, String operationDate) {
-		int discountPercentage = findCustById(getCustomers(), customerNo).getDiscountPercentge();
+		int discountPercentage = findCustById( customerNo).getDiscountPercentge();
 		Date date = dateParser(operationDate);
 		double price = item.getPolicy().getPrice()*((100-discountPercentage)/100);
 		Invoice invoice = new Invoice(date, item, price);
 		invoices.add(invoice);
 		item.rent();
 	}
+	
 	private void turnIn(int customerNo, RentableItem item, String operationDate) {
 		Date date = dateParser(operationDate);
 		item.turnIn();
-	}
+	}	
 	
-	
-	
-	private RentableItem findItemById(String itemType, int itemNo) {
+	public RentableItem findItemById(String itemType, int itemNo) {
 		ArrayList<RentableItem> items;
 		if(itemType.equals("book")) {
 			items = bookStock;
@@ -103,7 +120,8 @@ public class RentalStoreManager {
 		}
 		return null;
 	}
-	private Customer findCustById(ArrayList<Customer> customers, int id) {
+	
+	public Customer findCustById(int id) {
 		for (Customer cust: customers) {
 			if (cust.getId() == id) {
 				return cust;
@@ -111,15 +129,13 @@ public class RentalStoreManager {
 		}
 		return null;
 	}
-	
-
 
 	private int createItemId() {
 		return 0;
 	}
 	
 	private Date dateParser(String dateStr) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		Date date = null;
 		try {
 			date = sdf.parse(dateStr);
@@ -128,7 +144,4 @@ public class RentalStoreManager {
 		}
 		return date;
 	}
-	
-	
-
 }
