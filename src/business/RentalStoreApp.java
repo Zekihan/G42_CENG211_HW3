@@ -78,23 +78,25 @@ public class RentalStoreApp {
 		int a = keyboard.nextInt();
 		switch(a) {
 			case 1: System.out.println("Enter name: ");
-					String bName = keyboard.next();
+					keyboard.nextLine();
+					String bName = keyboard.nextLine();
 					System.out.println("Enter author: ");
-					String author = keyboard.next();
+					String author = keyboard.nextLine();
 					System.out.println("Enter publisher: ");
-					String publisher = keyboard.next();
+					String publisher = keyboard.nextLine();
 					mngr.addBookItem(bName, author, publisher);
 					break;
 			case 2: System.out.println("Enter name: ");
-					String mName = keyboard.next();
+					String mName = keyboard.nextLine();
 					System.out.println("Enter genre: ");
-					String genre = keyboard.next();
+					String genre = keyboard.nextLine();
 					System.out.println("Enter producer: ");
-					String producer = keyboard.next();
+					String producer = keyboard.nextLine();
 					System.out.println("Enter actor (write stop to stop adding): ");
 					ArrayList<String> actors = new ArrayList<>();
-					String actor = keyboard.next();
+					String actor = null;
 					while (!actor.equals("stop")) {
+						actor = keyboard.nextLine();
 						actors.add(actor);
 					}
 					mngr.addMovieItem(mName, genre, producer, actors);
@@ -126,7 +128,10 @@ public class RentalStoreApp {
 					break;
 			case 4: cust.setType(CustomerType.PREMIUM);
 					break;
+			default: 
+					break;
 		}
+		keyboard.nextLine();
 	}
 
 	private void changePolicy() {
@@ -160,6 +165,7 @@ public class RentalStoreApp {
 			default:
 					break;
 		}
+		keyboard.nextLine();
 	}
 
 	private void searchOp() {
@@ -168,33 +174,34 @@ public class RentalStoreApp {
 				"3) Two Attribute Book Search" + System.lineSeparator() +
 				"4) Two Attribute Movie Search");
 		int a = keyboard.nextInt();
+		keyboard.nextLine();
 		switch(a) {
 			case 1: System.out.println("Enter attribute (author, name or publisher): ");
-					String bookAtt = keyboard.next();
+					String bookAtt = keyboard.nextLine();
 					System.out.println("Enter search text: ");
-					String bookSearchText = keyboard.next();
+					String bookSearchText = keyboard.nextLine();
 					System.out.println(mngr.searchBooks(bookSearchText, bookAtt));
 					break;
 			case 2: System.out.println("Enter attribute (genre, name, producer or actor): ");
-					String movieAtt = keyboard.next();
+					String movieAtt = keyboard.nextLine();
 					System.out.println("Enter search text: ");
-					String movieSearchText = keyboard.next();
+					String movieSearchText = keyboard.nextLine();
 					System.out.println(mngr.searchMovies(movieSearchText, movieAtt));
 					break;
 			case 3: System.out.println("Enter 2 attributes (author, name or publisher) (with space between): ");
-					String bookAtt1 = keyboard.next();
-					String bookAtt2 = keyboard.next();
+					String bookAtt1 = keyboard.nextLine();
+					String bookAtt2 = keyboard.nextLine();
 					System.out.println("Enter search text(with space between and respectively): ");
-					String bookSearchText1 = keyboard.next();
-					String bookSearchText2 = keyboard.next();
+					String bookSearchText1 = keyboard.nextLine();
+					String bookSearchText2 = keyboard.nextLine();
 					System.out.println(mngr.searchBooksVanced(bookSearchText1, bookSearchText2, bookAtt1, bookAtt2));
 					break;	
 			case 4: System.out.println("Enter 2 attributes (genre, name, producer, actor) (with space between): ");
-					String movieAtt1 = keyboard.next();
-					String movieAtt2 = keyboard.next();
+					String movieAtt1 = keyboard.nextLine();
+					String movieAtt2 = keyboard.nextLine();
 					System.out.println("Enter search text(with space between and respectively): ");
-					String movieSearchText1 = keyboard.next();
-					String movieSearchText2 = keyboard.next();
+					String movieSearchText1 = keyboard.nextLine();
+					String movieSearchText2 = keyboard.nextLine();
 					System.out.println(mngr.searchMoviesVanced(movieSearchText1, movieSearchText2, movieAtt1, movieAtt2)); 
 					break;
 		}	
@@ -211,6 +218,7 @@ public class RentalStoreApp {
 		String date = keyboard.next();
 		
 		mngr.returnItem(custNo, itemType, itemNo, date);
+		keyboard.nextLine();
 	}
 
 	private void rentOp() {
@@ -224,5 +232,6 @@ public class RentalStoreApp {
 		String date = keyboard.next();
 		
 		mngr.rentItem(custNo, itemType, itemNo, date);
+		keyboard.nextLine();
 	}
 }

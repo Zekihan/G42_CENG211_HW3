@@ -12,7 +12,6 @@ public class RentalStoreManager {
 	private ArrayList<RentableItem> movieStock;
 	private ArrayList<Customer> customers;
 	
-	
 	public RentalStoreManager() {
 		invoices = new ArrayList<>();
 		bookStock = new ArrayList<>();
@@ -37,8 +36,6 @@ public class RentalStoreManager {
 		RentableItem item = findItemById("movie", itemNo);
 		movieStock.remove(item);
 	}
-	
-	
 	
 	public void rentItem(int customerNo, String itemType, int itemNo, String operationDay) {
 		RentableItem item = findItemById(itemType, itemNo);
@@ -73,6 +70,13 @@ public class RentalStoreManager {
 	
 	private ArrayList<RentableItem> search(ArrayList<RentableItem> items, String searchText, String searchAtt){
 		ArrayList<RentableItem> result = new ArrayList<RentableItem>();
+		if(searchAtt.equals("actor")) {
+			for (RentableItem item: items) {
+				if (item.getTextToSearchOn(searchAtt).contains(searchText)){
+					result.add(item);
+				}
+			}
+		}
 		for (RentableItem item: items) {
 			if (item.getTextToSearchOn(searchAtt).equals(searchText)){
 				result.add(item);
@@ -82,13 +86,29 @@ public class RentalStoreManager {
 	}
 	
 	private ArrayList<RentableItem> searchVanced(ArrayList<RentableItem> items, String searchText1,
-			String searchText2, String searchAtt1, String searchAtt2){
+		String searchText2, String searchAtt1, String searchAtt2){
 		ArrayList<RentableItem> result = new ArrayList<RentableItem>();
-		for (RentableItem item: items) {
-			if (item.getTextToSearchOn(searchAtt1).equals(searchText1) && item.getTextToSearchOn(searchAtt2).equals(searchText2)){
-				result.add(item);
+		if(searchAtt1.equals("actor") || searchAtt2.equals("actor")) {
+			if(searchAtt1.equals("actor")) {
+				for (RentableItem item: items) {
+					if (item.getTextToSearchOn(searchAtt1).contains(searchText1) && item.getTextToSearchOn(searchAtt2).equals(searchText2)){
+						result.add(item);
+					}
+				}
+			}else {
+				for (RentableItem item: items) {
+					if (item.getTextToSearchOn(searchAtt2).contains(searchText2) && item.getTextToSearchOn(searchAtt1).equals(searchText1)){
+						result.add(item);
+					}
+				}
 			}
-		}		
+		}else {	
+			for (RentableItem item: items) {
+				if (item.getTextToSearchOn(searchAtt1).equals(searchText1) && item.getTextToSearchOn(searchAtt2).equals(searchText2)){
+					result.add(item);
+				}
+			}
+		}
 		return result;
 	}
 	
