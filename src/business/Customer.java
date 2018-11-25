@@ -1,6 +1,6 @@
 package business;
 
-public class Customer {
+public class Customer implements IStorable {
 
 	private String name;
 	private int id;
@@ -30,6 +30,12 @@ public class Customer {
 	}
 	public void setType(CustomerType type) {
 		this.type = type;
+	}
+
+	@Override
+	public void store(String format) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

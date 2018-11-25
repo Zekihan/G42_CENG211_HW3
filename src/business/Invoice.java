@@ -1,7 +1,7 @@
 package business;
 import java.util.Date;
 
-public class Invoice {
+public class Invoice implements IStorable {
 	private Date rentDate;
 	private Date dueDate;
 	private RentableItem item;
@@ -13,7 +13,6 @@ public class Invoice {
 		setItem(item);
 		setDueDate(findDueDay(item));
 	}
-	
 	
 	public Date getRentDate() {
 		return rentDate;
@@ -49,6 +48,12 @@ public class Invoice {
 		}else {
 			throw new IllegalArgumentException("Invalid item type");
 		}
+	}
+
+	@Override
+	public void store(String format) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
