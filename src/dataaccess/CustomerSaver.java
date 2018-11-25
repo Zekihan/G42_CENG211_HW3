@@ -9,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import business.Customer;
+import business.CustomerType;
 
 public class CustomerSaver {
 	
@@ -73,7 +74,27 @@ public class CustomerSaver {
 		
 		customerJ.put("name",customer.getName());
 		customerJ.put("id",customer.getId());
-		customerJ.put("type",customer.getType());
+		
+		String type ;
+        
+        switch( customer.getType()) {
+		case GOLD:
+			type = "gold";
+			break;
+		case SILVER:
+			type = "silver";
+			break;
+		case PREMIUM:
+			type = "premium";
+			break;
+		case REGULAR:
+			type = "regular";
+			break;
+		default:
+			type = "regular";
+			break;
+		}
+		customerJ.put("type", type);
 		
 		return customerJ;
 	}

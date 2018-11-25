@@ -51,9 +51,26 @@ public class CustomerReader {
         int id = (int) (long) jsonObject.get("id");
 
         String name = (String) jsonObject.get("name");
-                
-        CustomerType type = (CustomerType) jsonObject.get("type");
         
+        CustomerType type ;
+        
+        switch( (String)(jsonObject.get("type"))) {
+		case "gold":
+			type = CustomerType.GOLD;
+			break;
+		case "silver":
+			type = CustomerType.SILVER;
+			break;
+		case "premium":
+			type = CustomerType.PREMIUM;
+			break;
+		case "regular":
+			type = CustomerType.REGULAR;
+			break;
+		default:
+			type = CustomerType.REGULAR;
+			break;
+		}
         Customer customer = new Customer(name,id);
         customer.setType(type);
 		return customer;
