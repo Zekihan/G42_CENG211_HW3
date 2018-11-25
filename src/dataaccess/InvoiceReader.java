@@ -56,8 +56,10 @@ public ArrayList<Invoice> readerManyJson() {
 	    String rentDate = (String) jsonObject.get("rentDate");
 	    
 	    String itemType = (String) jsonObject.get("itemType");
-	                    
-		return new Invoice(dateParser(dueDate),itemType,cost);
+	    
+	    Date date = dateParser(rentDate);
+	    
+		return new Invoice(date,itemType,cost);
 	}
 	private Date dateParser(String dateStr) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
