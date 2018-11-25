@@ -24,6 +24,7 @@ public class RentalStoreManager {
 		bookStock = br.readerManyJson();
 		movieStock = mr.readerManyJson();
 		customers = new ArrayList<>();
+		customers.add(new Customer("Ahmet", 1));
 	}
 	
 	public void addMovieItem(String name, String genre, String producer, ArrayList<String> actors) {
@@ -141,7 +142,7 @@ public class RentalStoreManager {
 	
 	
 	private void rent(int customerNo, RentableItem item, String operationDate) {
-		int discountPercentage = findCustById( customerNo).getDiscountPercentge();
+		int discountPercentage = findCustById(customerNo).getDiscountPercentge();
 		Date date = dateParser(operationDate);
 		double price = item.getPolicy().getPrice()*((100-discountPercentage)/100);
 		Invoice invoice = new Invoice(date, item, price);

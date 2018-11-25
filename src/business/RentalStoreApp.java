@@ -48,7 +48,7 @@ public class RentalStoreApp {
 					break;
 			default: 
 					break;
-			}	
+			}
 		}
 		
 		
@@ -108,8 +108,9 @@ public class RentalStoreApp {
 	}
 
 	private void invoiceAmount() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Enter the date that you want to check: ");
+		String date = keyboard.next();
+		System.out.println("Total invoices for given date: " + mngr.invoiceAmountForSpecificDay(date));
 	}
 
 	private void changeCustType() {
