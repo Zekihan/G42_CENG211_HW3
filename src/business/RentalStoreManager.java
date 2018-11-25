@@ -25,9 +25,21 @@ public class RentalStoreManager {
 		InvoiceReader ir = new InvoiceReader();
 		CustomerReader cr = new CustomerReader();
 		invoices = ir.readerManyJson();
+		if(invoices == null) {
+			invoices = new ArrayList<>();
+		}
 		bookStock = br.readerManyJson();
+		if(bookStock == null) {
+			bookStock = new ArrayList<>();
+		}
 		movieStock = mr.readerManyJson();
+		if(movieStock == null) {
+			movieStock = new ArrayList<>();
+		}
 		customers = cr.readerManyJson();
+		if(customers == null) {
+			customers = new ArrayList<>();
+		}
 	}
 	
 	public void addMovieItem(String name, String genre, String producer, ArrayList<String> actors) {
