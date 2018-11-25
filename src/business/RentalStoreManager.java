@@ -44,7 +44,30 @@ public class RentalStoreManager {
 			turnIn(customerNo, item, operationDay);
 		}
 	}
+	public ArrayList<RentableItem> search(ArrayList<RentableItem> items, String searchText, String searchAtt){
+		ArrayList<RentableItem> result = new ArrayList<RentableItem>();
+		for (RentableItem item: items) {
+			if (item.getTextToSearchOn(searchAtt).equals(searchText)){
+				result.add(item);
+			}
+		}		
+		return result;
+	}
 	
+	public ArrayList<RentableItem> searchVanced(ArrayList<RentableItem> items, String searchText1,
+			String searchText2, String searchAtt1, String searchAtt2){
+		ArrayList<RentableItem> result = new ArrayList<RentableItem>();
+		for (RentableItem item: items) {
+			if (item.getTextToSearchOn(searchAtt1).equals(searchText1) && item.getTextToSearchOn(searchAtt2).equals(searchText2)){
+				result.add(item);
+			}
+		}		
+		return result;
+	}
+	
+	public ArrayList<Invoice> getInvoices() {
+		return invoices;
+	}
 	private ArrayList<Customer> getCustomers() {
 		return customers;
 	}
@@ -89,9 +112,7 @@ public class RentalStoreManager {
 		return null;
 	}
 	
-	public ArrayList<Invoice> getInvoices() {
-		return invoices;
-	}
+
 
 	private int createItemId() {
 		return 0;
