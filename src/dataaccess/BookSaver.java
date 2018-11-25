@@ -7,12 +7,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import business.Book;
-import business.RentableItem;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,9 +23,15 @@ import javax.xml.transform.stream.StreamResult;
 
 public class BookSaver {
 
+	@SuppressWarnings("unchecked")
 	public void saverJson(Book book) {
 		
-		JSONObject books = BookToJson(book);
+		JSONObject books = new JSONObject();
+		
+		books.put("id", book.getItemNo());
+		books.put("name", book.getName());
+		books.put("author", book.getAuthor());
+		books.put("publisher", book.getPublisher());
 		
 		try {
 
@@ -44,34 +48,35 @@ public class BookSaver {
 	public void saverManyJson(Book book) {
 		
 		BookReader reader = new BookReader();
-		ArrayList<RentableItem> books = reader.readerManyJson();
+		JSONArray books = reader.readerManyJson();
 		if (books == null) {
-			books = new ArrayList<RentableItem>();
+			books = new JSONArray();
 		}
-		JSONObject bookJ = BookToJson(book);
+		JSONObject bookJ = new JSONObject();
+		bookJ.put("id", book.getItemNo());
+		bookJ.put("name", book.getName());
+		bookJ.put("author", book.getAuthor());
+		bookJ.put("publisher", book.getPublisher());
 
 		if(books.size()!=0) {
 			boolean flag = false;
-			for (RentableItem object : books) {
-				JSONObject obj = BookToJson((Book) object);
+			for (Object object : books) {
+				JSONObject obj = (JSONObject) object;
 				if(!(obj.toJSONString().equals(bookJ.toJSONString()))) {
 					flag = true;
+					System.out.println("bb");
 				}
 			}
 			if(flag) {
-				books.add(book);
+				books.add(bookJ);
 			}
 		}else {
-			books.add(book);
+			books.add(bookJ);
 		}
 		
-		JSONArray booksArray = new JSONArray();
-		for (RentableItem object : books) {
-			JSONObject bookJson = BookToJson((Book) object);
-			booksArray.add(bookJson);
-		}
+		
 		JSONObject filer = new JSONObject();
-		filer.put("books",booksArray);
+		filer.put("books",books);
 		try {
 
 			FileWriter file = new FileWriter("Files/books.json");
@@ -118,18 +123,6 @@ public class BookSaver {
 		} catch (TransformerException tfe) {
 			tfe.printStackTrace();
 		}
-	}
-	@SuppressWarnings("unchecked")
-	private JSONObject BookToJson(Book book) {
-		
-		JSONObject bookJ = new JSONObject();
-		
-		bookJ.put("id", book.getItemNo());
-		bookJ.put("name", book.getName());
-		bookJ.put("author", book.getAuthor());
-		bookJ.put("publisher", book.getPublisher());
-		
-		return bookJ;
 	}
 	
 }

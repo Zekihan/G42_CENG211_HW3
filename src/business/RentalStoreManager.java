@@ -5,9 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import dataaccess.BookReader;
-import dataaccess.MovieReader;
-
 public class RentalStoreManager {
 
 	private ArrayList<Invoice> invoices;
@@ -18,10 +15,8 @@ public class RentalStoreManager {
 	
 	public RentalStoreManager() {
 		invoices = new ArrayList<>();
-		BookReader br = new BookReader();
-		bookStock = br.readerManyJson();
-		MovieReader mr = new MovieReader();
-		movieStock = mr.readerManyJson();
+		bookStock = new ArrayList<>();
+		movieStock = new ArrayList<>();
 		customers = new ArrayList<>();
 	}
 	

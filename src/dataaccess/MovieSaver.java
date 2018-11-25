@@ -3,7 +3,6 @@ package dataaccess;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,7 +21,6 @@ import org.w3c.dom.Element;
 
 import business.Book;
 import business.Movie;
-import business.RentableItem;
 
 public class MovieSaver {
 
@@ -59,15 +57,23 @@ public class MovieSaver {
 	public void saverManyJson(Movie movie) {
 		
 		MovieReader reader = new MovieReader();
-		ArrayList<RentableItem> movies = reader.readerManyJson();
-		JSONArray moviesArray = new JSONArray();
+		JSONArray movies = reader.readerManyJson();
 		if (movies == null) {
-			movies = new ArrayList<>();
+			movies = new JSONArray();
 		}
-		for (RentableItem object : movies) {
-			moviesArray.add(MovieToJson((Movie)object));
+		JSONObject movieJ = new JSONObject();
+		
+		movieJ.put("id", movie.getItemNo());
+		movieJ.put("name", movie.getName());
+		movieJ.put("genre", movie.getGenre());
+		movieJ.put("producer", movie.getProducer());
+		
+		JSONArray actors = new JSONArray();
+		
+		for (String actor : movie.getActors()) {
+			actors.add(actor);
 		}
-		JSONObject movieJ = MovieToJson(movie);
+		movieJ.put("actors", actors);
 		
 		if(movies.size()!=0) {
 			boolean flag = false;
@@ -79,14 +85,10 @@ public class MovieSaver {
 				}
 			}
 			if(flag) {
-				moviesArray.add(movieJ);
+				movies.add(movieJ);
 			}
 		}else {
-			moviesArray.add(movieJ);
-		}
-		for (RentableItem object : movies) {
-			JSONObject movieJson = MovieToJson((Movie) object);
-			moviesArray.add(movieJson);
+			movies.add(movieJ);
 		}
 		
 		JSONObject filer = new JSONObject();
@@ -152,24 +154,5 @@ public class MovieSaver {
 		} catch (TransformerException tfe) {
 			tfe.printStackTrace();
 		}
-	}
-	@SuppressWarnings("unchecked")
-	private JSONObject MovieToJson(Movie movie) {
-		
-		JSONObject movieJ = new JSONObject();
-		
-		movieJ.put("id", movie.getItemNo());
-		movieJ.put("name", movie.getName());
-		movieJ.put("genre", movie.getGenre());
-		movieJ.put("producer", movie.getProducer());
-		
-		JSONArray actors = new JSONArray();
-		
-		for (String actor : movie.getActors()) {
-			actors.add(actor);
-		}
-		movieJ.put("actors", actors);
-		
-		return movieJ;
 	}
 }

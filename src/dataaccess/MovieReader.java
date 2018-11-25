@@ -3,19 +3,15 @@ package dataaccess;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import business.Movie;
-import business.RentableItem;
-
 public class MovieReader {
 
-	public RentableItem readerJson(int itemNo) {
+	public void readerJson(int itemNo) {
 		JSONParser parser = new JSONParser();
 
         try {
@@ -23,8 +19,16 @@ public class MovieReader {
             Object obj = parser.parse(new FileReader("Files/"+itemNo+".json"));
 
             JSONObject jsonObject = (JSONObject) obj;
+
+            long id = (long) jsonObject.get("id");
+
+            String name = (String) jsonObject.get("name");
             
-            return JsonToMovie(jsonObject);
+            String author = (String) jsonObject.get("genre");
+
+            String publisher = (String) jsonObject.get("producer");
+            
+            JSONArray actors = (JSONArray) jsonObject.get("actors");
             
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -33,10 +37,9 @@ public class MovieReader {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return null;
 	}
 
-	public ArrayList<RentableItem> readerManyJson() {
+	public JSONArray readerManyJson() {
 		
 		JSONParser parser = new JSONParser();
 
@@ -49,12 +52,8 @@ public class MovieReader {
                 JSONObject jsonObject = (JSONObject) obj;
 
                 JSONArray books = (JSONArray) jsonObject.get("movies");
-            	ArrayList<RentableItem> booksArray = new ArrayList<>();
-
-                for (Object object : books) {
-                	booksArray.add(JsonToMovie((JSONObject) object));
-				}
-                return booksArray;
+                
+                return books;
         	}
         	newFile.close();
             
@@ -67,19 +66,5 @@ public class MovieReader {
 			e.printStackTrace();
 		}
         return null;	
-	}
-	@SuppressWarnings("unchecked")
-	private Movie JsonToMovie(JSONObject jsonObject) {
-		
-        int id = (int) (long) jsonObject.get("id");
-
-        String name = (String) jsonObject.get("name");
-        
-        String genre = (String) jsonObject.get("genre");
-
-        String producer = (String) jsonObject.get("producer");
-        
-        JSONArray actors = (JSONArray) jsonObject.get("actors");
-		return new Movie(name,id,genre,producer,actors);
 	}
 }
