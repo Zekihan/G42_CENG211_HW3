@@ -61,6 +61,10 @@ public class RentalStoreManager {
 		return counter;
 	}
 	
+	public void addCustomer(String name) {
+		customers.add(new Customer(name,createCustId()));
+	}
+	
 	public void rentItem(int customerNo, String itemType, int itemNo, String operationDay) {
 		RentableItem item = findItemById(itemType, itemNo);
 		if (item.isRented()) {
@@ -183,6 +187,10 @@ public class RentalStoreManager {
 
 	private int createItemId() {
 		int id =  bookStock.size() + 1;
+		return id;
+	}
+	private int createCustId() {
+		int id =  customers.size() + 1;
 		return id;
 	}
 	

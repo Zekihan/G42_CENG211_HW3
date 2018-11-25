@@ -24,8 +24,9 @@ public class RentalStoreApp {
 					"5) Change a Customers type " + System.lineSeparator() + 
 					"6) Invoice amount for a day" + System.lineSeparator() + 	
 					"7) Add item to the stock"+ System.lineSeparator() + 
-					"8) Remove item from stock"+ System.lineSeparator() + 
-					"9) Exit " + System.lineSeparator());
+					"8) Remove item from stock"+ System.lineSeparator() +
+					"9) Add new Customer"+ System.lineSeparator() +
+					"10) Exit " + System.lineSeparator());
 			int a = keyboard.nextInt();
 			switch(a){
 			case 1: rentOp();
@@ -44,15 +45,23 @@ public class RentalStoreApp {
 					break;
 			case 8: removeItem();
 					break;
-			case 9: System.exit(0);
+			case 9: addCustomer();
+					break;
+			case 10: keyboard.close();
+					System.exit(0);
 					break;
 			default: 
 					break;
 			}
 		}
-		
-		
 	}
+	private void addCustomer() {
+		keyboard.nextLine();
+		System.out.println("Enter customer name: ");
+		String name = keyboard.nextLine();
+		mngr.addCustomer(name);
+	}
+
 	private void removeItem() {
 		System.out.println("Enter item type: " + System.lineSeparator()+
 				"1) Book" + System.lineSeparator() +
@@ -192,18 +201,18 @@ public class RentalStoreApp {
 					String movieSearchText = keyboard.nextLine();
 					System.out.println(mngr.searchMovies(movieSearchText, movieAtt));
 					break;
-			case 3: System.out.println("Enter 2 attributes (author, name or publisher) (with space between): ");
+			case 3: System.out.println("Enter 2 attributes (author, name or publisher) (Press enter after entering first): ");
 					String bookAtt1 = keyboard.nextLine();
 					String bookAtt2 = keyboard.nextLine();
-					System.out.println("Enter search text(with space between and respectively): ");
+					System.out.println("Enter search text(Press enter after entering first): ");
 					String bookSearchText1 = keyboard.nextLine();
 					String bookSearchText2 = keyboard.nextLine();
 					System.out.println(mngr.searchBooksVanced(bookSearchText1, bookSearchText2, bookAtt1, bookAtt2));
 					break;	
-			case 4: System.out.println("Enter 2 attributes (genre, name, producer, actor) (with space between): ");
+			case 4: System.out.println("Enter 2 attributes (genre, name, producer, actor) (Press enter after entering first): ");
 					String movieAtt1 = keyboard.nextLine();
 					String movieAtt2 = keyboard.nextLine();
-					System.out.println("Enter search text(with space between and respectively): ");
+					System.out.println("Enter search text(Press enter after entering first): ");
 					String movieSearchText1 = keyboard.nextLine();
 					String movieSearchText2 = keyboard.nextLine();
 					System.out.println(mngr.searchMoviesVanced(movieSearchText1, movieSearchText2, movieAtt1, movieAtt2)); 
