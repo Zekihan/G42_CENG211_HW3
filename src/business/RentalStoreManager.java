@@ -152,13 +152,15 @@ public class RentalStoreManager {
 		Date date = dateParser(operationDate);
 		double price = item.getPolicy().getPrice()*((100-discountPercentage)/100);
 		
-		Invoice invoice = new Invoice(date, itemType, price);
+		Invoice invoice = new Invoice(date, itemType, price, createInvoiceId() );
 		invoices.add(invoice);
 		item.rent();
 	}
 	
 	private void turnIn(int customerNo, RentableItem item, String operationDate) {
 		Date date = dateParser(operationDate);
+		long milisecPasses =  date.getTime();
+		
 		item.turnIn();
 	}	
 	
@@ -188,12 +190,25 @@ public class RentalStoreManager {
 		return null;
 	}
 
+	public Invoice findInvoiceById(int id) {
+		for (Invoice invoice: invoices) {
+			if (invoice.getId() == id) {
+				return invoice;
+			}
+		}
+		return null;
+	}
+	
 	private int createItemId() {
 		int id =  bookStock.size() + 1;
 		return id;
 	}
 	private int createCustId() {
 		int id =  customers.size() + 1;
+		return id;
+	}
+	private int createInvoiceId() {
+		int id = invoices.size() + 1;
 		return id;
 	}
 	

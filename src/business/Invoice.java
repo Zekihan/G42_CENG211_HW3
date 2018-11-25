@@ -6,12 +6,15 @@ public class Invoice implements IStorable {
 	private Date dueDate;
 	private String itemType;
 	private double cost;
+	private int id;
 	
-	public Invoice(Date opDate, String itemType, double cost) {
+	public Invoice(Date opDate, String itemType, double cost, int id) {
 		setRentDate(opDate);
 		setCost(cost);
 		setItemType(itemType);
 		setDueDate(findDueDay(itemType));
+		setId(id);
+		
 	}
 	
 	public Date getRentDate() {
@@ -58,6 +61,14 @@ public class Invoice implements IStorable {
 
 	private void setItemType(String itemType) {
 		this.itemType = itemType;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	private void setId(int id) {
+		this.id = id;
 	}
 	
 }
