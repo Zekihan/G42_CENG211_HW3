@@ -11,12 +11,13 @@ public class RentalStoreApp {
 		mngr = new RentalStoreManager();
 		keyboard = new Scanner(System.in);
 	}
-
+	
 	public void start() {
 
-		System.out.println("Welcome to the Book & Movie Rent Application" + System.lineSeparator());
+		System.out.println("Welcome to the Book & Movie Rent Application" );
 		while(true) {
-			System.out.println("Menu:" + System.lineSeparator() + 
+			System.out.println( System.lineSeparator() +
+					"Menu:" + System.lineSeparator() + 
 					"1) Rent Operation" + System.lineSeparator() +
 					"2) Return Operation" + System.lineSeparator() + 
 					"3) Search Item " + System.lineSeparator() + 

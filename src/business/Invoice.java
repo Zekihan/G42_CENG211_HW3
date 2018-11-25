@@ -4,14 +4,14 @@ import java.util.Date;
 public class Invoice implements IStorable {
 	private Date rentDate;
 	private Date dueDate;
-	private RentableItem item;
+	private String itemType;
 	private double cost;
 	
-	public Invoice(Date opDate, RentableItem item, double cost) {
+	public Invoice(Date opDate, String itemType, double cost) {
 		setRentDate(opDate);
 		setCost(cost);
-		setItem(item);
-		setDueDate(findDueDay(item));
+		setItemType(itemType);
+		setDueDate(findDueDay(itemType));
 	}
 	
 	public Date getRentDate() {
@@ -20,9 +20,7 @@ public class Invoice implements IStorable {
 	public Date getDueDate() {
 		return dueDate;
 	}
-	public RentableItem getItem() {
-		return item;
-	}
+
 	public double getCost() {
 		return cost;
 	}
@@ -34,16 +32,14 @@ public class Invoice implements IStorable {
 		this.dueDate = new Date(date + (dayNum * 86400000));
 	}
 	
-	private void setItem(RentableItem item) {
-		this.item = item;
-	}
+
 	private void setCost(double cost) {
 		this.cost = cost;
 	}
-	private int findDueDay(RentableItem item) {
-		if (item.getClass() == Book.class) {
+	private int findDueDay(String itemType) {
+		if (itemType.equals("book") ) {
 			return 7;
-		}else if(item.getClass() == Movie.class) {
+		}else if(itemType.equals("movie")) {
 			return 2;
 		}else {
 			throw new IllegalArgumentException("Invalid item type");
@@ -54,6 +50,14 @@ public class Invoice implements IStorable {
 	public void store(String format) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getItemType() {
+		return itemType;
+	}
+
+	private void setItemType(String itemType) {
+		this.itemType = itemType;
 	}
 	
 }
