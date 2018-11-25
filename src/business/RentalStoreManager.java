@@ -78,8 +78,10 @@ public class RentalStoreManager {
 	
 	public void addCustomer(String name) {
 		int id = createCustId();
-		customers.add(new Customer(name,id));
+		Customer cust = new Customer(name,id);
+		customers.add(cust);
 		System.out.println("Successfully created customer named: " + name + " and with id: " + id );
+		cust.store("json");
 	}
 	
 	public void rentItem(int customerNo, String itemType, int itemNo, String operationDay) {
