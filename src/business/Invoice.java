@@ -1,6 +1,8 @@
 package business;
 import java.util.Date;
 
+import dataaccess.InvoiceSaver;
+
 public class Invoice implements IStorable {
 	private Date rentDate;
 	private Date dueDate;
@@ -51,8 +53,8 @@ public class Invoice implements IStorable {
 
 	@Override
 	public void store(String format) {
-		// TODO Auto-generated method stub
-		
+		InvoiceSaver is = new InvoiceSaver();
+		is.saverManyJson(this);
 	}
 
 	public String getItemType() {

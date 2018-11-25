@@ -1,5 +1,7 @@
 package business;
 
+import dataaccess.CustomerSaver;
+
 public class Customer implements IStorable {
 
 	private String name;
@@ -37,8 +39,8 @@ public class Customer implements IStorable {
 
 	@Override
 	public void store(String format) {
-		// TODO Auto-generated method stub
-		
+		CustomerSaver cs = new CustomerSaver();
+		cs.saverManyJson(this);
 	}
 	
 	

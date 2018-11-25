@@ -7,6 +7,8 @@ import java.util.Date;
 
 import dataaccess.BookReader;
 import dataaccess.BookSaver;
+import dataaccess.CustomerReader;
+import dataaccess.InvoiceReader;
 import dataaccess.MovieReader;
 import dataaccess.MovieSaver;
 
@@ -20,11 +22,12 @@ public class RentalStoreManager {
 	public RentalStoreManager() {
 		BookReader br = new BookReader();
 		MovieReader mr = new MovieReader();
-		invoices = new ArrayList<>();
+		InvoiceReader ir = new InvoiceReader();
+		CustomerReader cr = new CustomerReader();
+		invoices = ir.readerManyJson();
 		bookStock = br.readerManyJson();
 		movieStock = mr.readerManyJson();
-		customers = new ArrayList<>();
-		customers.add(new Customer("Ahmet", 1));
+		customers = cr.readerManyJson();
 	}
 	
 	public void addMovieItem(String name, String genre, String producer, ArrayList<String> actors) {
@@ -198,7 +201,6 @@ public class RentalStoreManager {
 		}
 		return null;
 	}
-	
 	private int createItemId() {
 		int id =  bookStock.size() + 1;
 		return id;
