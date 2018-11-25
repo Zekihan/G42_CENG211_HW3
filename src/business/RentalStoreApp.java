@@ -149,7 +149,7 @@ public class RentalStoreApp {
 	}
 
 	private void changePolicy() {
-		System.out.println("Enter item type: " + System.lineSeparator()+
+		System.out.println("Choose item type: " + System.lineSeparator()+
 				"1) Book" + System.lineSeparator() +
 				"2) Movie");
 		RentableItem item = null;
@@ -224,7 +224,7 @@ public class RentalStoreApp {
 	private void returnOp() {
 		System.out.println("Enter customer no: ");
 		int custNo = keyboard.nextInt();
-		System.out.println("Enter item type: ");
+		System.out.println("Enter item type (book or movie): ");
 		String itemType = keyboard.next();
 		System.out.println("Enter item no: ");
 		int itemNo = keyboard.nextInt();
@@ -238,7 +238,7 @@ public class RentalStoreApp {
 	private void rentOp() {
 		System.out.println("Enter customer no: ");
 		int custNo = keyboard.nextInt();
-		System.out.println("Enter item type: ");
+		System.out.println("Enter item type (book or movie): ");
 		String itemType = keyboard.next();
 		System.out.println("Enter item no: ");
 		int itemNo = keyboard.nextInt();

@@ -179,25 +179,27 @@ public class RentalStoreManager {
 		Invoice invoice = findInvoiceByItemNo(item.getItemNo());
 		Date dueDate = invoice.getDueDate();
 		long milisecPassed =  returnDate.getTime() - dueDate.getTime();
+		int daysPassed;
 		if (item.getClass() == Book.class) {
 			if(milisecPassed > 86400000*7) {
-				int daysPassed = (int) ((milisecPassed/86400000) - 7) ;
+				daysPassed = (int) ((milisecPassed/86400000) - 7) ;
 				for(int i = 0; i < daysPassed; i++) {
 					Invoice newInvoice = new Invoice(dueDate, "book", item.getPolicy().getOverDuePrice(), item.getItemNo());
 					invoices.add(newInvoice);
 				}
-			}else {
-				if(milisecPassed > 86400000*2) {
-					int daysPassed = (int) ((milisecPassed/86400000) - 2);
-					for(int i = 0; i < daysPassed; i++) {
-						Invoice newInvoice = new Invoice(dueDate, "book", item.getPolicy().getOverDuePrice(), item.getItemNo());
-						invoices.add(newInvoice);
-					}
+			}
+		}
+		else {
+			if(milisecPassed > 86400000*2) {
+				daysPassed = (int) ((milisecPassed/86400000) - 2);
+				for(int i = 0; i < daysPassed; i++) {
+					Invoice newInvoice = new Invoice(dueDate, "book", item.getPolicy().getOverDuePrice(), item.getItemNo());
+					invoices.add(newInvoice);
 				}
 			}
 		}
 		
-		
+		System.out.println("Customer ");
 		item.turnIn();
 	}	
 	
