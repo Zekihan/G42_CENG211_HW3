@@ -84,8 +84,14 @@ public class BookSaver {
 		}
 		
 	}
-	
-	
+
+	public void saverManyJson(ArrayList<RentableItem> books) {
+		 File file = new File("Files/books.json");
+		 file.delete();
+		 for (RentableItem book : books) {
+			saverManyJson((Book)book);
+		}
+	}
 	public void saverXml(Book book) {
 		try {
 			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();

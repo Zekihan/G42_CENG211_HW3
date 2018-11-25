@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import dataaccess.BookReader;
+import dataaccess.BookSaver;
 import dataaccess.MovieReader;
+import dataaccess.MovieSaver;
 
 public class RentalStoreManager {
 
@@ -26,20 +28,26 @@ public class RentalStoreManager {
 	
 	public void addMovieItem(String name, String genre, String producer, ArrayList<String> actors) {
 		RentableItem movieItem = new Movie(name, createItemId(), genre, producer, actors);
+		movieItem.store("json");
 		movieStock.add(movieItem);
 	}
 	
 	public void addBookItem(String name, String author, String publisher) {
 		RentableItem bookItem = new Book(name, createItemId(), author, publisher);
+		bookItem.store("json");
 		bookStock.add(bookItem);
 	}
 	public void removeBookItem(int itemNo) {
 		RentableItem item = findItemById("book", itemNo);
 		bookStock.remove(item);
+		BookSaver bs = new BookSaver();
+		bs.saverManyJson(bookStock);
 	}
 	public void removeMovieItem(int itemNo) {
 		RentableItem item = findItemById("movie", itemNo);
 		movieStock.remove(item);
+		MovieSaver bs = new MovieSaver();
+		bs.saverManyJson(bookStock);
 	}
 	
 	public void rentItem(int customerNo, String itemType, int itemNo, String operationDay) {

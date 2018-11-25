@@ -1,6 +1,8 @@
 package business;
 import java.util.ArrayList;
 
+import dataaccess.MovieSaver;
+
 public class Movie extends RentableItem {
 
 	private String genre;
@@ -16,7 +18,12 @@ public class Movie extends RentableItem {
 	
 	@Override
 	public void store(String format) {
-		// TODO Auto-generated method stub
+		MovieSaver ms = new MovieSaver();
+		if(format.equals("json")) {
+			ms.saverManyJson(this);
+		}else {
+			ms.saverXml(this);
+		}
 		
 	}
 	

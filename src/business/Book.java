@@ -1,5 +1,6 @@
 package business;
 
+import dataaccess.BookSaver;
 
 public class Book extends RentableItem {
 
@@ -18,6 +19,12 @@ public class Book extends RentableItem {
 
 	@Override
 	public void store(String format) {
+		BookSaver bs = new BookSaver();
+		if(format.equals("json")) {
+			bs.saverManyJson(this);
+		}else {
+			bs.saverXml(this);
+		}
 		
 	}
 

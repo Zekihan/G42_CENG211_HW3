@@ -102,7 +102,13 @@ public class MovieSaver {
 		}
 		
 	}
-	
+	public void saverManyJson(ArrayList<RentableItem> movies) {
+		 File file = new File("Files/books.json");
+		 file.delete();
+		 for (RentableItem movie : movies) {
+			saverManyJson((Movie) movie);
+		}
+	}
 	public void saverXml(Movie movie) {
 		try {
 			
