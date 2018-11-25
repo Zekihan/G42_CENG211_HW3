@@ -171,6 +171,7 @@ public class RentalStoreManager {
 		
 		Invoice invoice = new Invoice(date, itemType, price, item.getItemNo());
 		invoices.add(invoice);
+		invoice.store("json");
 		item.rent();
 	}
 	
@@ -195,6 +196,8 @@ public class RentalStoreManager {
 				for(int i = 0; i < daysPassed; i++) {
 					Invoice newInvoice = new Invoice(dueDate, "book", item.getPolicy().getOverDuePrice(), item.getItemNo());
 					invoices.add(newInvoice);
+					invoice.store("json");
+					
 				}
 			}
 		}

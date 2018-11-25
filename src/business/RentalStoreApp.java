@@ -115,6 +115,7 @@ public class RentalStoreApp {
 					mngr.addMovieItem(mName, genre, producer, actors);
 					break;
 		}
+		System.out.println("Successfully Created Item");
 	}
 
 	private void invoiceAmount() {
