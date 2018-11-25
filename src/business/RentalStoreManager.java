@@ -62,7 +62,9 @@ public class RentalStoreManager {
 	}
 	
 	public void addCustomer(String name) {
-		customers.add(new Customer(name,createCustId()));
+		int id = createCustId();
+		customers.add(new Customer(name,id));
+		System.out.println("Successfully created customer named: " + name + " and with id: " + id );
 	}
 	
 	public void rentItem(int customerNo, String itemType, int itemNo, String operationDay) {
@@ -70,7 +72,7 @@ public class RentalStoreManager {
 		if (item.isRented()) {
 			System.out.println("Item already rented");
 		}else {
-			rent(customerNo, item, operationDay);
+			rent(customerNo, item, itemType, operationDay);
 		}
 	}
 	
@@ -145,11 +147,12 @@ public class RentalStoreManager {
 	}
 	
 	
-	private void rent(int customerNo, RentableItem item, String operationDate) {
+	private void rent(int customerNo, RentableItem item, String itemType, String operationDate) {
 		int discountPercentage = findCustById(customerNo).getDiscountPercentge();
 		Date date = dateParser(operationDate);
 		double price = item.getPolicy().getPrice()*((100-discountPercentage)/100);
-		Invoice invoice = new Invoice(date, item, price);
+		
+		Invoice invoice = new Invoice(date, itemType, price);
 		invoices.add(invoice);
 		item.rent();
 	}
