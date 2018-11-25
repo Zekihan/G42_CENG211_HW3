@@ -15,20 +15,19 @@ public class RentalStoreApp {
 	public void start() {
 
 		System.out.println("Welcome to the Book & Movie Rent Application" + System.lineSeparator());
-		
-		System.out.println("Menu:" + System.lineSeparator() + 
-				"1) Rent Operation" + System.lineSeparator() +
-				"2) Return Operation" + System.lineSeparator() + 
-				"3) Search Item " + System.lineSeparator() + 
-				"4) Change Rent Policy of an Item" + System.lineSeparator() + 
-				"5) Change a Customers type " + System.lineSeparator() + 
-				"6) Invoice amount for a day" + System.lineSeparator() + 	
-				"7) Add item to the stock"+ System.lineSeparator() + 
-				"8) Remove item from stock"+ System.lineSeparator() + 
-				"9) Exit " + System.lineSeparator());
-		
-		int a = keyboard.nextInt();
-		switch(a){
+		while(true) {
+			System.out.println("Menu:" + System.lineSeparator() + 
+					"1) Rent Operation" + System.lineSeparator() +
+					"2) Return Operation" + System.lineSeparator() + 
+					"3) Search Item " + System.lineSeparator() + 
+					"4) Change Rent Policy of an Item" + System.lineSeparator() + 
+					"5) Change a Customers type " + System.lineSeparator() + 
+					"6) Invoice amount for a day" + System.lineSeparator() + 	
+					"7) Add item to the stock"+ System.lineSeparator() + 
+					"8) Remove item from stock"+ System.lineSeparator() + 
+					"9) Exit " + System.lineSeparator());
+			int a = keyboard.nextInt();
+			switch(a){
 			case 1: rentOp();
 					break;
 			case 2: returnOp();
@@ -49,7 +48,9 @@ public class RentalStoreApp {
 					break;
 			default: 
 					break;
-		}	
+			}	
+		}
+		
 		
 	}
 	private void removeItem() {
@@ -172,13 +173,13 @@ public class RentalStoreApp {
 					String bookAtt = keyboard.next();
 					System.out.println("Enter search text: ");
 					String bookSearchText = keyboard.next();
-					mngr.searchBooks(bookSearchText, bookAtt);
+					System.out.println(mngr.searchBooks(bookSearchText, bookAtt));
 					break;
 			case 2: System.out.println("Enter attribute (genre, name, producer or actor): ");
 					String movieAtt = keyboard.next();
 					System.out.println("Enter search text: ");
 					String movieSearchText = keyboard.next();
-					mngr.searchMovies(movieSearchText, movieAtt);
+					System.out.println(mngr.searchMovies(movieSearchText, movieAtt));
 					break;
 			case 3: System.out.println("Enter 2 attributes (author, name or publisher) (with space between): ");
 					String bookAtt1 = keyboard.next();
@@ -186,7 +187,7 @@ public class RentalStoreApp {
 					System.out.println("Enter search text(with space between and respectively): ");
 					String bookSearchText1 = keyboard.next();
 					String bookSearchText2 = keyboard.next();
-					mngr.searchBooksVanced(bookSearchText1, bookSearchText2, bookAtt1, bookAtt2);
+					System.out.println(mngr.searchBooksVanced(bookSearchText1, bookSearchText2, bookAtt1, bookAtt2));
 					break;	
 			case 4: System.out.println("Enter 2 attributes (genre, name, producer, actor) (with space between): ");
 					String movieAtt1 = keyboard.next();
@@ -194,7 +195,7 @@ public class RentalStoreApp {
 					System.out.println("Enter search text(with space between and respectively): ");
 					String movieSearchText1 = keyboard.next();
 					String movieSearchText2 = keyboard.next();
-					mngr.searchMoviesVanced(movieSearchText1, movieSearchText2, movieAtt1, movieAtt2);
+					System.out.println(mngr.searchMoviesVanced(movieSearchText1, movieSearchText2, movieAtt1, movieAtt2)); 
 					break;
 		}	
 	}

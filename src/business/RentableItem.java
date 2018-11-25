@@ -55,6 +55,14 @@ public abstract class RentableItem implements IRentable,IStorable,ISearchable {
 	public void setPolicy(Policy policy) {
 		this.policy = policy;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("RentableItem [name=").append(name).append(", itemNo=").append(itemNo).append(", isRented=")
+				.append(isRented).append(", policy=").append(policy).append("]");
+		return builder.toString();
+	}
 	
 	
 }

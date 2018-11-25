@@ -69,6 +69,14 @@ public class Movie extends RentableItem {
 		}
 		return text;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Movie [genre=").append(genre).append(", producer=").append(producer).append(", actors=")
+				.append(actors).append(", toString()=").append(super.toString()).append("]");
+		return builder.toString();
+	}
 	
 	
 
