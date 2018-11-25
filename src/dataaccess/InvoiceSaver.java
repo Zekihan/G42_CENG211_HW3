@@ -3,7 +3,10 @@ package dataaccess;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -72,11 +75,18 @@ public class InvoiceSaver {
 		JSONObject invoiceJ = new JSONObject();
 		
 		invoiceJ.put("name",invoice.getRentDate());
-		invoiceJ.put("id",invoice.getDueDate());
-		invoiceJ.put("type",invoice.getRentDate());
+		invoiceJ.put("id",dateParser(invoice.getDueDate()));
+		invoiceJ.put("type",dateParser(invoice.getRentDate()));
 		invoiceJ.put("type",invoice.getItemType());
 		invoiceJ.put("itemNo",invoice.getItemNo());
 		
 		return invoiceJ;
+	}
+	
+	private String dateParser(Date date) {
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		String strDate = dateFormat.format(date);
+		return strDate;
 	}
 }
