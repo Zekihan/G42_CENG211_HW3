@@ -18,6 +18,9 @@ public class Customer implements IStorable {
 	public int getId() {
 		return id;
 	}
+	public CustomerType getType() {
+		return type;
+	}
 	public int getDiscountPercentge() {
 		return type.getDiscount();
 	}
