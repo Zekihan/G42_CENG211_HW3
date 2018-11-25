@@ -50,8 +50,6 @@ public ArrayList<Invoice> readerManyJson() {
 	private Invoice JsonToInvoice(JSONObject jsonObject) {
 		
 		double cost = (double) (long) jsonObject.get("cost");
-	
-	    String dueDate = (String) jsonObject.get("dueDate");
 	    
 	    String rentDate = (String) jsonObject.get("rentDate");
 	    
@@ -59,9 +57,9 @@ public ArrayList<Invoice> readerManyJson() {
 	    
 	    Date date = dateParser(rentDate);
 	    
-	    int id = (int) (long) jsonObject.get("id");
+	    int itemNo = (int) (long) jsonObject.get("itemNo");
 	    
-		return new Invoice(date,itemType,cost,id);
+		return new Invoice(date,itemType,cost,itemNo);
 	}
 	private Date dateParser(String dateStr) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

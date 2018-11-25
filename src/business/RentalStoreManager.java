@@ -155,14 +155,34 @@ public class RentalStoreManager {
 		Date date = dateParser(operationDate);
 		double price = item.getPolicy().getPrice()*((100-discountPercentage)/100);
 		
-		Invoice invoice = new Invoice(date, itemType, price, createInvoiceId() );
+		Invoice invoice = new Invoice(date, itemType, price, item.getItemNo());
 		invoices.add(invoice);
 		item.rent();
 	}
 	
 	private void turnIn(int customerNo, RentableItem item, String operationDate) {
-		Date date = dateParser(operationDate);
-		long milisecPasses =  date.getTime();
+		Date returnDate = dateParser(operationDate);
+		Invoice invoice = findInvoiceByItemNo(item.getItemNo());
+		Date dueDate = invoice.getDueDate();
+		long milisecPassed =  returnDate.getTime() - dueDate.getTime();
+		if (item.getClass() == Book.class) {
+			if(milisecPassed > 86400000*7) {
+				int daysPassed = (int) ((milisecPassed/86400000) - 7) ;
+				for(int i = 0; i < daysPassed; i++) {
+					Invoice newInvoice = new Invoice(dueDate, "book", item.getPolicy().getOverDuePrice(), item.getItemNo());
+					invoices.add(newInvoice);
+				}
+			}else {
+				if(milisecPassed > 86400000*2) {
+					int daysPassed = (int) ((milisecPassed/86400000) - 2);
+					for(int i = 0; i < daysPassed; i++) {
+						Invoice newInvoice = new Invoice(dueDate, "book", item.getPolicy().getOverDuePrice(), item.getItemNo());
+						invoices.add(newInvoice);
+					}
+				}
+			}
+		}
+		
 		
 		item.turnIn();
 	}	
@@ -192,27 +212,28 @@ public class RentalStoreManager {
 		}
 		return null;
 	}
-
-	public Invoice findInvoiceById(int id) {
+	
+	public Invoice findInvoiceByItemNo(int itemNo) {
 		for (Invoice invoice: invoices) {
-			if (invoice.getId() == id) {
+			if (invoice.getItemNo() == itemNo) {
 				return invoice;
 			}
-		}
-		return null;
+		}return null;
 	}
+
+	
 	private int createItemId() {
 		int id =  bookStock.size() + 1;
 		return id;
 	}
 	private int createCustId() {
+		if(customers == null) {
+			return 1;
+		}
 		int id =  customers.size() + 1;
 		return id;
 	}
-	private int createInvoiceId() {
-		int id = invoices.size() + 1;
-		return id;
-	}
+
 	
 	private Date dateParser(String dateStr) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

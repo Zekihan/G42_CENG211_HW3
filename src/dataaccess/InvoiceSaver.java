@@ -75,7 +75,7 @@ public class InvoiceSaver {
 		invoiceJ.put("id",invoice.getDueDate());
 		invoiceJ.put("type",invoice.getRentDate());
 		invoiceJ.put("type",invoice.getItemType());
-		invoiceJ.put("id",invoice.getId());
+		invoiceJ.put("itemNo",invoice.getItemNo());
 		
 		return invoiceJ;
 	}
