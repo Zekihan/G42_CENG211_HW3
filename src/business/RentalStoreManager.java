@@ -49,6 +49,16 @@ public class RentalStoreManager {
 		MovieSaver bs = new MovieSaver();
 		bs.saverManyJson(bookStock);
 	}
+	public int invoiceAmountForSpecificDay(String dateStr) {
+		Date date = dateParser(dateStr);
+		int counter = 0;
+		for (Invoice invoice: invoices) {
+			if (invoice.getRentDate().equals(date)){
+				counter++;
+			}
+		}
+		return counter;
+	}
 	
 	public void rentItem(int customerNo, String itemType, int itemNo, String operationDay) {
 		RentableItem item = findItemById(itemType, itemNo);
