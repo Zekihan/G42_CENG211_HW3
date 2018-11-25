@@ -74,10 +74,9 @@ public class InvoiceSaver {
 		
 		JSONObject invoiceJ = new JSONObject();
 		
-		invoiceJ.put("name",invoice.getRentDate());
-		invoiceJ.put("id",dateParser(invoice.getDueDate()));
-		invoiceJ.put("type",dateParser(invoice.getRentDate()));
-		invoiceJ.put("type",invoice.getItemType());
+		invoiceJ.put("cost",invoice.getCost());
+		invoiceJ.put("rentDate",dateParser(invoice.getRentDate()));
+		invoiceJ.put("itemType",invoice.getItemType());
 		invoiceJ.put("itemNo",invoice.getItemNo());
 		
 		return invoiceJ;
