@@ -89,7 +89,7 @@ public class MovieSaver {
 		}
 		
 		JSONObject filer = new JSONObject();
-		filer.put("movies",movies);
+		filer.put("movies",moviesArray);
 		try {
 
 			FileWriter file = new FileWriter("Files/movies.json");
