@@ -1,5 +1,6 @@
 package business;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RentalStoreApp {
@@ -51,15 +52,53 @@ public class RentalStoreApp {
 		}	
 		
 	}
-
 	private void removeItem() {
-		// TODO Auto-generated method stub
+		System.out.println("Enter item type: " + System.lineSeparator()+
+				"1) Book" + System.lineSeparator() +
+				"2) Movie");
+		int a = keyboard.nextInt();
+		System.out.println("Enter item no: " );
+		int itemNo = keyboard.nextInt();
+		switch(a) {
+			case 1: mngr.removeBookItem(itemNo);
+					break;
+			case 2: mngr.removeMovieItem(itemNo);
+					break;
+			default: 
+					break;
+		}
 		
 	}
 
 	private void addItem() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Enter item type: " + System.lineSeparator()+
+				"1) Book" + System.lineSeparator() +
+				"2) Movie");
+		int a = keyboard.nextInt();
+		switch(a) {
+			case 1: System.out.println("Enter name: ");
+					String bName = keyboard.next();
+					System.out.println("Enter author: ");
+					String author = keyboard.next();
+					System.out.println("Enter publisher: ");
+					String publisher = keyboard.next();
+					mngr.addBookItem(bName, author, publisher);
+					break;
+			case 2: System.out.println("Enter name: ");
+					String mName = keyboard.next();
+					System.out.println("Enter genre: ");
+					String genre = keyboard.next();
+					System.out.println("Enter producer: ");
+					String producer = keyboard.next();
+					System.out.println("Enter actor (write stop to stop adding): ");
+					ArrayList<String> actors = new ArrayList<>();
+					String actor = keyboard.next();
+					while (!actor.equals("stop")) {
+						actors.add(actor);
+					}
+					mngr.addMovieItem(mName, genre, producer, actors);
+					break;
+		}
 	}
 
 	private void invoiceAmount() {

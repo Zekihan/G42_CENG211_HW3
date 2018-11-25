@@ -29,6 +29,16 @@ public class RentalStoreManager {
 		RentableItem bookItem = new Book(name, createItemId(), author, publisher);
 		bookStock.add(bookItem);
 	}
+	public void removeBookItem(int itemNo) {
+		RentableItem item = findItemById("book", itemNo);
+		bookStock.remove(item);
+	}
+	public void removeMovieItem(int itemNo) {
+		RentableItem item = findItemById("movie", itemNo);
+		movieStock.remove(item);
+	}
+	
+	
 	
 	public void rentItem(int customerNo, String itemType, int itemNo, String operationDay) {
 		RentableItem item = findItemById(itemType, itemNo);
