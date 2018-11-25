@@ -27,13 +27,13 @@ public class RentalStoreManager {
 	}
 	
 	public void addMovieItem(String name, String genre, String producer, ArrayList<String> actors) {
-		RentableItem movieItem = new Movie(name, createItemId(), genre, producer, actors);
+		RentableItem movieItem = new Movie(name, createItemId(), false, genre, producer, actors);
 		movieItem.store("json");
 		movieStock.add(movieItem);
 	}
 	
 	public void addBookItem(String name, String author, String publisher) {
-		RentableItem bookItem = new Book(name, createItemId(), author, publisher);
+		RentableItem bookItem = new Book(name, createItemId(), false, author, publisher);
 		bookItem.store("json");
 		bookStock.add(bookItem);
 	}
@@ -129,9 +129,6 @@ public class RentalStoreManager {
 		return invoices;
 	}
 	
-	private ArrayList<Customer> getCustomers() {
-		return customers;
-	}
 	
 	private void rent(int customerNo, RentableItem item, String operationDate) {
 		int discountPercentage = findCustById( customerNo).getDiscountPercentge();
@@ -174,7 +171,8 @@ public class RentalStoreManager {
 	}
 
 	private int createItemId() {
-		return 0;
+		int id =  bookStock.size() + 1;
+		return id;
 	}
 	
 	private Date dateParser(String dateStr) {

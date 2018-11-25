@@ -132,6 +132,7 @@ public class BookSaver {
 		
 		bookJ.put("id", book.getItemNo());
 		bookJ.put("name", book.getName());
+		bookJ.put("isRented", book.isRented());
 		bookJ.put("author", book.getAuthor());
 		bookJ.put("publisher", book.getPublisher());
 		

@@ -9,8 +9,8 @@ public class Movie extends RentableItem {
 	private String producer;
 	private ArrayList<String> actors;
 	
-	public Movie(String name, int itemNo, String genre, String producer, ArrayList<String> actors) {
-		super(name, itemNo);
+	public Movie(String name, int itemNo, boolean isRented, String genre, String producer, ArrayList<String> actors) {
+		super(name, itemNo, isRented);
 		setGenre(genre);
 		setProducer(producer);
 		setActors(actors);

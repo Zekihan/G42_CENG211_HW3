@@ -7,10 +7,10 @@ public abstract class RentableItem implements IRentable,IStorable,ISearchable {
 	private boolean isRented;
 	private Policy policy;
 	
-	public RentableItem(String name, int itemNo) {
+	public RentableItem(String name, int itemNo, boolean isRented) {
 		setName(name);
 		setItemNo(itemNo);
-		setRented(true);
+		setRented(isRented);
 		setPolicy(Policy.NewReleasePolicy);
 	}
 	

@@ -76,9 +76,10 @@ public class RentalStoreApp {
 				"1) Book" + System.lineSeparator() +
 				"2) Movie");
 		int a = keyboard.nextInt();
+		keyboard.nextLine();
 		switch(a) {
 			case 1: System.out.println("Enter name: ");
-					keyboard.nextLine();
+					
 					String bName = keyboard.nextLine();
 					System.out.println("Enter author: ");
 					String author = keyboard.nextLine();
@@ -94,11 +95,13 @@ public class RentalStoreApp {
 					String producer = keyboard.nextLine();
 					System.out.println("Enter actor (write stop to stop adding): ");
 					ArrayList<String> actors = new ArrayList<>();
-					String actor = null;
-					while (!actor.equals("stop")) {
-						actor = keyboard.nextLine();
+					String actor = keyboard.nextLine();
+					do {
 						actors.add(actor);
+						actor = keyboard.nextLine();
 					}
+					while (!actor.equals("stop"));
+	
 					mngr.addMovieItem(mName, genre, producer, actors);
 					break;
 		}

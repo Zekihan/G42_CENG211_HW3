@@ -74,9 +74,12 @@ public class BookReader {
 
         String name = (String) jsonObject.get("name");
         
+        boolean isRented = (boolean) jsonObject.get("isRented");
+        
         String author = (String) jsonObject.get("author");
 
         String publisher = (String) jsonObject.get("publisher");
-		return new Book(name,id,author,publisher);
+        
+		return new Book(name,id, isRented, author,publisher);
 	}
 }

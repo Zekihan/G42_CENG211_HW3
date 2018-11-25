@@ -8,11 +8,11 @@ public class Book extends RentableItem {
 	private String publisher;
 	
 	public Book() {
-		this("no name", -1, "no author", "no publisher");
+		this("no name", -1, false, "no author", "no publisher");
 	}
 	
-	public Book(String name, int itemNo, String author, String publisher) {
-		super(name,itemNo);
+	public Book(String name, int itemNo, boolean isRented, String author, String publisher) {
+		super(name,itemNo, isRented);
 		setAuthor(author);
 		setPublisher(publisher);
 	}
@@ -62,6 +62,14 @@ public class Book extends RentableItem {
 				break;
 		}
 		return text;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Book [author=").append(author).append(", publisher=").append(publisher).append(", toString()=")
+				.append(super.toString()).append("]");
+		return builder.toString();
 	}
 	
 }

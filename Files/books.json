@@ -1,1 +1,1 @@
-{"books":[{"author":"Herman Melville","name":"Moby Dick","publisher":"Cambridge","id":101}]}
+{"books":[{"author":"Ellen White","name":"Moby Dick","publisher":"Rock Books","isRented":false,"id":1},{"author":"Kemal","name":"","publisher":"Can","isRented":false,"id":2},{"author":"No Author","name":"Hekimoglu","publisher":"Can","isRented":false,"id":3}]}

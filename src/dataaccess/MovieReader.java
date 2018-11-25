@@ -75,11 +75,14 @@ public class MovieReader {
 
         String name = (String) jsonObject.get("name");
         
+        boolean isRented = (boolean) jsonObject.get("isRented");
+        
         String genre = (String) jsonObject.get("genre");
 
         String producer = (String) jsonObject.get("producer");
         
         JSONArray actors = (JSONArray) jsonObject.get("actors");
-		return new Movie(name,id,genre,producer,actors);
+
+		return new Movie(name,id, isRented, genre,producer,actors);
 	}
 }

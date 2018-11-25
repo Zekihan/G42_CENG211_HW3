@@ -103,7 +103,7 @@ public class MovieSaver {
 		
 	}
 	public void saverManyJson(ArrayList<RentableItem> movies) {
-		 File file = new File("Files/books.json");
+		 File file = new File("Files/movies.json");
 		 file.delete();
 		 for (RentableItem movie : movies) {
 			saverManyJson((Movie) movie);
@@ -165,6 +165,7 @@ public class MovieSaver {
 		
 		movieJ.put("id", movie.getItemNo());
 		movieJ.put("name", movie.getName());
+		movieJ.put("isRented", movie.isRented());
 		movieJ.put("genre", movie.getGenre());
 		movieJ.put("producer", movie.getProducer());
 		
